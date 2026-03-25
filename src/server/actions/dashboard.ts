@@ -150,7 +150,11 @@ export const getDashboardMetrics = cache(async () => {
         project: projectFilter
       },
       include: {
-        project: { select: { name: true } }
+        project: { select: { name: true } },
+        assignments: {
+          take: 1,
+          include: { user: { select: { name: true, email: true } } }
+        }
       },
       orderBy: { createdAt: 'desc' },
       take: 5
