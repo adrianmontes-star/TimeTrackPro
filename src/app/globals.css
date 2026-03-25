@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #f0fdf4;
+  --color-brand-100: #dcfce7;
+  --color-brand-200: #bbf7d0;
+  --color-brand-300: #86efac;
+  --color-brand-400: #4ade80;
+  --color-brand-500: #22c55e;
+  --color-brand-600: #16a34a;
+  --color-brand-700: #15803d;
+  --color-brand-800: #166534;
+  --color-brand-900: #14532d;
+  --color-brand-950: #052e16;
+}
+
+@layer base {
+  :root {
+    --background: #f9fafb;
+    --foreground: #111827;
+    --card: #ffffff;
+    --card-foreground: #111827;
+    --primary: #166534;
+    --primary-foreground: #ffffff;
+    --muted: #f3f4f6;
+    --muted-foreground: #6b7280;
+    --border: #e5e7eb;
+    --border-strong: #d1d5db;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-[var(--primary)] text-[var(--primary-foreground)] px-4 py-2 hover:bg-[var(--color-brand-700)] rounded-full transition-colors font-medium cursor-pointer shadow-sm disabled:opacity-50 disabled:cursor-not-allowed justify-center flex items-center gap-2;
+  }
+  .btn-outline {
+    @apply border border-[var(--border-strong)] bg-white text-[var(--foreground)] px-4 py-2 hover:bg-[var(--muted)] rounded-full transition-colors font-medium cursor-pointer shadow-sm disabled:opacity-50 disabled:cursor-not-allowed justify-center flex items-center gap-2;
+  }
+  .btn-ghost {
+    @apply text-[var(--foreground)] px-4 py-2 hover:bg-[var(--muted)] rounded-full transition-colors cursor-pointer justify-center flex items-center gap-2;
+  }
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-500)] focus:border-transparent transition-all;
+  }
+  .input-field {
+    @apply w-full border border-[var(--border-strong)] rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-500)] focus:border-transparent transition-all;
+  }
+}
