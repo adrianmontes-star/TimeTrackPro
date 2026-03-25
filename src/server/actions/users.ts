@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 
 export async function getUsers() {
   try {
-    await getCurrentUser(); // Optional: Validate admin
+    await getCurrentUser();
     const users = await prisma.user.findMany({
       orderBy: { createdAt: 'desc' },
       include: {
@@ -21,21 +21,27 @@ export async function getUsers() {
 
 export async function updateUserRole(userId: string, targetRole: string) {
   try {
-    await getCurrentUser(); // Validate admin in real life
+    const currentUser = await getCurrentUser();
+    if (currentUser.role !== "ADMIN") {
+      return { success: false, error: "No autorizado: solo el administrador puede cambiar roles." };
+    }
     await prisma.user.update({
       where: { id: userId },
-      data: { role: targetRole }
+      data: { role: targetRole as any }
     });
     revalidatePath("/admin/users");
     return { success: true };
   } catch(err) {
-    return { success: false, error: "Error updating role" };
+    return { success: false, error: "Error al actualizar el rol." };
   }
 }
 
 export async function assignSupervisor(userId: string, supervisorId: string | null) {
   try {
-    await getCurrentUser();
+    const currentUser = await getCurrentUser();
+    if (currentUser.role !== "ADMIN") {
+      return { success: false, error: "No autorizado: solo el administrador puede asignar supervisores." };
+    }
     await prisma.user.update({
       where: { id: userId },
       data: { supervisorId }
@@ -43,6 +49,6 @@ export async function assignSupervisor(userId: string, supervisorId: string | nu
     revalidatePath("/admin/users");
     return { success: true };
   } catch(err) {
-    return { success: false, error: "Error assigning supervisor" };
+    return { success: false, error: "Error al asignar supervisor." };
   }
 }

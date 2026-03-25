@@ -5,25 +5,32 @@ import { updateUserRole, assignSupervisor } from "@/server/actions/users";
 import { toast } from "sonner";
 import { Shield, User as UserIcon } from "lucide-react";
 
-export default function UserRowActions({ user, supervisors }: { user: any, supervisors: any[] }) {
+export default function UserRowActions({
+  user,
+  supervisors,
+  isAdmin,
+}: {
+  user: any;
+  supervisors: any[];
+  isAdmin: boolean;
+}) {
   const [role, setRole] = useState(user.role);
   const [supervisorId, setSupervisorId] = useState(user.supervisorId || "");
   const [isUpdating, setIsUpdating] = useState(false);
 
   // Exclude self from supervisor list
-  const availableSupervisors = supervisors.filter(s => s.id !== user.id);
+  const availableSupervisors = supervisors.filter((s) => s.id !== user.id);
 
   const handleRoleChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newRole = e.target.value;
     setRole(newRole);
     setIsUpdating(true);
-    
     const res = await updateUserRole(user.id, newRole);
     if (res.success) {
       toast.success("Rol actualizado con éxito");
     } else {
       toast.error(res.error || "Fallo al actualizar rol");
-      setRole(user.role); // revert
+      setRole(user.role);
     }
     setIsUpdating(false);
   };
@@ -32,20 +39,63 @@ export default function UserRowActions({ user, supervisors }: { user: any, super
     const newSupId = e.target.value;
     setSupervisorId(newSupId);
     setIsUpdating(true);
-    
-    // Convert empty string back to null
     const targetId = newSupId === "" ? null : newSupId;
-    
     const res = await assignSupervisor(user.id, targetId);
     if (res.success) {
       toast.success("Supervisor asignado con éxito");
     } else {
       toast.error(res.error || "Fallo al asignar supervisor");
-      setSupervisorId(user.supervisorId || ""); // revert
+      setSupervisorId(user.supervisorId || "");
     }
     setIsUpdating(false);
   };
 
+  // Role label helper
+  const roleLabel: Record<string, string> = {
+    ADMIN: "Administrador",
+    SUPERVISOR: "Supervisor",
+    EMPLOYEE: "Empleado",
+  };
+
+  // Read-only view for non-admins
+  if (!isAdmin) {
+    const supervisorName =
+      availableSupervisors.find((s) => s.id === supervisorId)?.name ||
+      user.supervisor?.name ||
+      null;
+
+    return (
+      <>
+        <td className="px-6 py-4">
+          <div className="flex items-center gap-2">
+            {role === "ADMIN" ? (
+              <Shield className="w-4 h-4 text-amber-500" />
+            ) : (
+              <UserIcon className="w-4 h-4 text-gray-400" />
+            )}
+            <span
+              className={`text-xs font-semibold py-1.5 px-2 rounded-lg border ${
+                role === "ADMIN"
+                  ? "bg-amber-50 text-amber-700 border-amber-200"
+                  : role === "SUPERVISOR"
+                  ? "bg-blue-50 text-blue-700 border-blue-200"
+                  : "bg-gray-50 text-gray-700 border-gray-200"
+              }`}
+            >
+              {roleLabel[role] ?? role}
+            </span>
+          </div>
+        </td>
+        <td className="px-6 py-4">
+          <span className="text-xs text-gray-500">
+            {supervisorName ?? "— Sin supervisor —"}
+          </span>
+        </td>
+      </>
+    );
+  }
+
+  // Editable view for admins
   return (
     <>
       <td className="px-6 py-4">
@@ -59,10 +109,12 @@ export default function UserRowActions({ user, supervisors }: { user: any, super
             value={role}
             onChange={handleRoleChange}
             disabled={isUpdating}
-            className={`text-xs font-semibold py-1.5 px-2 rounded-lg border outline-none appearance-none cursor-pointer group-hover:bg-white transition-colors ${
-              role === "ADMIN" ? "bg-amber-50 text-amber-700 border-amber-200" :
-              role === "SUPERVISOR" ? "bg-blue-50 text-blue-700 border-blue-200" :
-              "bg-gray-50 text-gray-700 border-gray-200"
+            className={`text-xs font-semibold py-1.5 px-2 rounded-lg border outline-none appearance-none cursor-pointer transition-colors ${
+              role === "ADMIN"
+                ? "bg-amber-50 text-amber-700 border-amber-200"
+                : role === "SUPERVISOR"
+                ? "bg-blue-50 text-blue-700 border-blue-200"
+                : "bg-gray-50 text-gray-700 border-gray-200"
             }`}
           >
             <option value="EMPLOYEE">Empleado</option>
@@ -80,11 +132,14 @@ export default function UserRowActions({ user, supervisors }: { user: any, super
           className="w-full text-xs text-gray-700 py-1.5 px-2 rounded-lg border border-gray-200 bg-gray-50 outline-none appearance-none cursor-pointer focus:ring-1 focus:ring-[var(--primary)] hover:bg-white transition-colors disabled:opacity-50"
         >
           <option value="">-- Sin supervisor --</option>
-          {availableSupervisors.map(s => (
-            <option key={s.id} value={s.id}>{s.name || s.email}</option>
+          {availableSupervisors.map((s) => (
+            <option key={s.id} value={s.id}>
+              {s.name || s.email}
+            </option>
           ))}
         </select>
       </td>
     </>
   );
 }
+

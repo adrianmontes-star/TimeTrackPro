@@ -1,4 +1,5 @@
 import { getUsers } from "@/server/actions/users";
+import { getCurrentUser } from "@/server/actions/time-sessions";
 import UserRowActions from "./UserRowActions";
 import { ShieldAlert, Users, Mail, Calendar } from "lucide-react";
 
@@ -7,7 +8,16 @@ export const dynamic = "force-dynamic";
 export default async function AdminUsersPage() {
   const { users } = await getUsers();
   const displayUsers = users || [];
-  
+
+  // Determine if the current logged-in user is an admin
+  let isAdmin = false;
+  try {
+    const currentUser = await getCurrentUser();
+    isAdmin = currentUser.role === "ADMIN";
+  } catch {
+    isAdmin = false;
+  }
+
   // Potential supervisors are users with role SUPERVISOR or ADMIN
   const supervisors = displayUsers.filter((u: any) => u.role === "SUPERVISOR" || u.role === "ADMIN");
 
@@ -68,9 +78,9 @@ export default async function AdminUsersPage() {
                       {user.email}
                     </div>
                   </td>
-                  
+
                   {/* The interactive row actions component handles Role and Supervisor */}
-                  <UserRowActions user={user} supervisors={supervisors} />
+                  <UserRowActions user={user} supervisors={supervisors} isAdmin={isAdmin} />
 
                   <td className="px-6 py-4">
                     <span className={`px-2.5 py-1 rounded-md text-xs font-semibold ${user.status === 'ACTIVE' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
@@ -91,3 +101,5 @@ export default async function AdminUsersPage() {
     </div>
   );
 }
+
+
