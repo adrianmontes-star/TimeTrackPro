@@ -3,7 +3,7 @@ import { z } from "zod";
 export const timeSessionSchema = z.object({
   taskId: z.string().min(1, "Debe seleccionar una tarea"),
   projectId: z.string().min(1, "Debe seleccionar un proyecto"),
-  startTime: z.coerce.date({ errorMap: () => ({ message: "La hora de inicio es requerida" }) }),
+  startTime: z.coerce.date({ error: "La hora de inicio es requerida" }),
   endTime: z.coerce.date().nullable().optional(),
   duration: z.number().min(0).optional(),
   notes: z.string().optional(),
