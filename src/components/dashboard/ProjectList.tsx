@@ -5,7 +5,7 @@ export default function ProjectList({ projects = [] }: { projects?: any[] }) {
   return (
     <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col h-full">
       <div className="flex justify-between items-center mb-6">
-        <h3 className="font-semibold text-gray-900">Project List</h3>
+        <h3 className="font-semibold text-gray-900">Lista de Proyectos</h3>
         <button className="text-gray-400 hover:text-gray-900">
           <MoreHorizontal className="w-5 h-5" />
         </button>

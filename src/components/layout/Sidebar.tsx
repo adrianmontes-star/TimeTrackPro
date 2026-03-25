@@ -14,11 +14,11 @@ import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
 
 const MENU_ITEMS: Array<{ icon: any, label: string, href: string, badge?: string }> = [
-  { icon: LayoutDashboard, label: "Dashboard", href: "/" },
-  { icon: CheckSquare, label: "Tasks", href: "/projects" },
-  { icon: CalendarDays, label: "Calendar", href: "/calendar" },
-  { icon: BarChart3, label: "Analytics", href: "/reports" },
-  { icon: Users, label: "Team", href: "/admin/users" },
+  { icon: LayoutDashboard, label: "Panel", href: "/" },
+  { icon: CheckSquare, label: "Tareas", href: "/projects" },
+  { icon: CalendarDays, label: "Calendario", href: "/calendar" },
+  { icon: BarChart3, label: "Analíticas", href: "/reports" },
+  { icon: Users, label: "Equipo", href: "/admin/users" },
 ];
 
 
@@ -80,7 +80,7 @@ export default function Sidebar() {
           className="flex items-center w-full px-3 py-2.5 text-sm font-medium rounded-xl text-gray-500 hover:text-gray-900 hover:bg-white transition-colors"
         >
           <LogOut className="mr-3 h-5 w-5 flex-shrink-0 text-gray-400" />
-          Logout
+          Cerrar Sesión
         </button>
       </nav>
 

@@ -19,7 +19,7 @@ export default function TeamCollaboration({ tasks = [] }: { tasks?: any[] }) {
   return (
     <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 h-full">
       <div className="flex justify-between items-center mb-6">
-        <h3 className="font-semibold text-gray-900">Team Collaboration</h3>
+        <h3 className="font-semibold text-gray-900">Colaboración del Equipo</h3>
         <button className="text-gray-400 hover:text-gray-900">
           <MoreHorizontal className="w-5 h-5" />
         </button>
@@ -29,9 +29,9 @@ export default function TeamCollaboration({ tasks = [] }: { tasks?: any[] }) {
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="border-b border-gray-100 text-xs text-gray-500 uppercase tracking-wider">
-              <th className="pb-3 font-medium">Team Member</th>
-              <th className="pb-3 font-medium">Task</th>
-              <th className="pb-3 font-medium">Status</th>
+              <th className="pb-3 font-medium">Miembro</th>
+              <th className="pb-3 font-medium">Tarea</th>
+              <th className="pb-3 font-medium">Estado</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-50">

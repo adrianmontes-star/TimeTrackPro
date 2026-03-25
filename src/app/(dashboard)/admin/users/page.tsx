@@ -84,7 +84,7 @@ export default async function AdminUsersPage() {
 
                   <td className="px-6 py-4">
                     <span className={`px-2.5 py-1 rounded-md text-xs font-semibold ${user.status === 'ACTIVE' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-                      {user.status}
+                      {user.status === 'ACTIVE' ? 'ACTIVO' : 'INACTIVO'}
                     </span>
                   </td>
                 </tr>

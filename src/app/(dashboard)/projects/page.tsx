@@ -95,7 +95,7 @@ export default async function ProjectsPage({ searchParams }: { searchParams: Pro
               </div>
               <div className="bg-gray-50 border-t border-gray-100 px-6 py-3 flex justify-between items-center text-xs font-semibold text-gray-500">
                 <span className={`px-2 py-1 rounded-md ${project.status === 'ACTIVE' ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-700'}`}>
-                  {project.status}
+                  {project.status === 'ACTIVE' ? 'ACTIVO' : project.status === 'COMPLETED' ? 'FINALIZADO' : project.status}
                 </span>
                 <span>{project.tasks?.length || 0} Tareas</span>
               </div>

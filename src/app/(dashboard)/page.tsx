@@ -29,7 +29,7 @@ export default async function DashboardPage() {
     <div className="pt-6">
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight text-gray-900">Dashboard</h2>
+          <h2 className="text-2xl font-bold tracking-tight text-gray-900">Panel Principal</h2>
           <p className="text-sm text-gray-500 mt-1">
             Hola {(user as any)?.name?.split(" ")[0] || "Administrador"}, bienvenido de vuelta a TimeTrack Pro
           </p>

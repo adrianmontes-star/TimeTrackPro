@@ -42,7 +42,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             <div>
               <h1 className="text-3xl font-bold text-gray-900 tracking-tight">{project.name}</h1>
               <span className={`inline-block mt-1 px-2.5 py-0.5 rounded-md text-xs font-semibold ${project.status === 'ACTIVE' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-600'}`}>
-                {project.status}
+                {project.status === 'ACTIVE' ? 'ACTIVO' : project.status === 'COMPLETED' ? 'FINALIZADO' : project.status}
               </span>
             </div>
           </div>
@@ -102,7 +102,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                           </p>
                         )}
                         <div className="flex items-center gap-3 text-xs text-gray-500 font-medium mt-2">
-                          <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" /> PENDIENTE TRACK</span>
+                          <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" /> SIN REGISTRO</span>
                         </div>
                       </div>
                     </div>

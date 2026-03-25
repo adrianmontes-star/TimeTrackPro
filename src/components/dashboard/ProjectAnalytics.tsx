@@ -21,7 +21,7 @@ export default function ProjectAnalytics({ data }: { data?: any[] }) {
   return (
     <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col h-full">
       <div className="flex justify-between items-center mb-6">
-        <h3 className="font-semibold text-gray-900">Project Analytics</h3>
+        <h3 className="font-semibold text-gray-900">Análisis de Proyectos</h3>
       </div>
       
       <div className="flex-1 w-full min-h-[160px]">

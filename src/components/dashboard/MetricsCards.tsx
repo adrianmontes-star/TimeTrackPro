@@ -7,7 +7,7 @@ export default function MetricsCards({ metrics }: { metrics?: any }) {
       {/* Total Projects Card (Green) */}
       <div className="bg-[#166534] rounded-2xl p-6 text-white relative overflow-hidden shadow-md">
         <div className="flex justify-between items-start mb-6 relative z-10">
-          <h3 className="font-medium">Total Projects</h3>
+          <h3 className="font-medium">Total de Proyectos</h3>
         </div>
         <div className="relative z-10">
           <p className="text-5xl font-bold tracking-tight mb-4">{m.totalProjects}</p>
@@ -20,7 +20,7 @@ export default function MetricsCards({ metrics }: { metrics?: any }) {
       {/* Ended Projects Card */}
       <div className="bg-white rounded-2xl p-6 relative overflow-hidden shadow-sm border border-gray-100">
         <div className="flex justify-between items-start mb-6">
-          <h3 className="font-medium text-gray-900">Ended Projects</h3>
+          <h3 className="font-medium text-gray-900">Proyectos Finalizados</h3>
         </div>
         <div>
           <p className="text-5xl font-bold tracking-tight text-gray-900 mb-4">{m.endedProjects}</p>
@@ -33,7 +33,7 @@ export default function MetricsCards({ metrics }: { metrics?: any }) {
       {/* Running Projects Card */}
       <div className="bg-white rounded-2xl p-6 relative overflow-hidden shadow-sm border border-gray-100">
         <div className="flex justify-between items-start mb-6">
-          <h3 className="font-medium text-gray-900">Running Projects</h3>
+          <h3 className="font-medium text-gray-900">Proyectos Activos</h3>
         </div>
         <div>
           <p className="text-5xl font-bold tracking-tight text-gray-900 mb-4">{m.runningProjects}</p>
@@ -46,7 +46,7 @@ export default function MetricsCards({ metrics }: { metrics?: any }) {
       {/* Pending Project Card */}
       <div className="bg-white rounded-2xl p-6 relative overflow-hidden shadow-sm border border-gray-100">
         <div className="flex justify-between items-start mb-6">
-          <h3 className="font-medium text-gray-900">Pending Project</h3>
+          <h3 className="font-medium text-gray-900">Proyectos Pendientes</h3>
         </div>
         <div>
           <p className="text-5xl font-bold tracking-tight text-gray-900 mb-4">{m.pendingProjects}</p>
